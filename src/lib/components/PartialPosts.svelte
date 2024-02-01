@@ -12,7 +12,8 @@
 <div class="posts">
 	{#each posts as post}
 		<div class="post">
-			<a class="post_heading" href={post.url}>{post.title}</a>
+			<!-- data-href -> href (stub for now) -->
+			<a class="post_heading" data-href={post.url} href="/">{post.title}</a>
 			<p class="post_timestamp">{post.timestamp}</p>
 		</div>
 	{/each}
