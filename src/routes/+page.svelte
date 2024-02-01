@@ -23,12 +23,13 @@
 			<a href="https://bento.me/kavin81" target="_blank" rel="noreferrer"><Bento/></a>
 
 			<PartialPosts PartialPosts={data.body}/>
-			<UC enabled={false}/>
+			<UC enabled={true}/>
 		</div>
 
 	</inner>
 </outer>
 
+<span id="todo" style="display:none"></span>
 <style lang="scss">
 	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
