@@ -12,7 +12,8 @@
 <div class="posts">
 	{#each posts as post}
 		<div class="post">
-			<a class="post_heading" href={post.url}>{post.title}</a>
+			<!-- add href={post.url}  once /blog complete-->
+			<a class="post_heading" href="#">{post.title}</a>
 			<p class="post_timestamp">{post.timestamp}</p>
 		</div>
 	{/each}
