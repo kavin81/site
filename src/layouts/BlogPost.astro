@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+interface Props {
+    post: CollectionEntry<"blog">;
+}
+
+import BaseLayout from "./BaseLayout.astro";
+
+const { post } = Astro.props;
+
+const {
+    data: { title, desc, publishedAt, updatedAt, tags, draft, hero_img },
+    slug,
+} = post;
+---
+
+<BaseLayout meta={{title:title,desc:desc}}>
+
+    <h1>{title}</h1>
+    <h3>{desc}</h3>
+
+    <p>publishedAt: {publishedAt}</p>
+    <p>updatedAt: {updatedAt != undefined ? updatedAt : "never"}</p>
+    <code>draft: {draft}</code>
+
+    <br /><br />
+
+    <Image src={hero_img.src} alt={hero_img.alt} />
+    <ul>
+        <li>tags:</li>
+        <ul>
+            {tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+    </ul>
+
+
+</BaseLayout>

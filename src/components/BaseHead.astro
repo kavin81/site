@@ -1,0 +1,84 @@
+---
+const { siteTitle, siteDesc, ArticleDate } = Astro.props;
+import { siteConfig } from "../site.config";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!-- metadata -->
+<meta charset="utf-8" />
+<meta
+    content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    name="viewport"
+/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<title>{siteTitle}</title>
+
+<!-- gfonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin="anonymous"
+/>
+<!-- atkinson hyperlegible,fira-mono,inter -->
+<link
+    media="print"
+    rel="stylesheet"
+    onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Mono:wght@400;500;700&family=Inter:wght@100..900&display=swap"
+/>
+
+<!-- analytics -->
+<script
+    defer
+    src="https://cloud.umami.is/script.js"
+    data-website-id={import.meta.env.UMAMI_WEBSITE_ID}></script>
+
+<!-- icons TODO: better favicon-->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+
+<!-- basic meta-tags -->
+<meta content={siteTitle} name="title" />
+<meta content={siteDesc} name="description" />
+<meta content={siteConfig.author} name="author" />
+
+<!-- open-graph/fb -->
+<meta content={ArticleDate ? "article" : "website"} property="og:type" />
+<meta content={siteTitle} property="og:title" />
+<meta content={siteDesc} property="og:description" />
+<meta content={canonicalURL} property="og:url" />
+<meta content={siteConfig.title} property="og:site_name" />
+<meta content={siteConfig.lang} property="og:locale" />
+<!-- <meta content={socialImageURL} property='og:image' /> -->
+<meta content="1200" property="og:image:width" />
+<meta content="630" property="og:image:height" />
+{
+    ArticleDate && (
+        <>
+            <meta content={siteConfig.author} property="article:author" />
+            <meta content={ArticleDate} property="article:published_time" />
+        </>
+    )
+}
+
+<!-- twitter -->
+<meta content="summary_large_image" property="twitter:card" />
+<meta content={canonicalURL} property="twitter:url" />
+<meta content={siteTitle} property="twitter:title" />
+<meta content={siteDesc} property="twitter:description" />
+<!-- <meta content={socialImageURL} property='twitter:image' /> -->
+
+<!-- sitemap -->
+<link href="/sitemap-index.xml" rel="sitemap" />
+
+<!-- rss-feed -->
+<link
+    href="/rss.xml"
+    rel="alternate"
+    title={siteConfig.title}
+    type="application/rss+xml"
+/>
+<meta content={Astro.generator} name="generator" />

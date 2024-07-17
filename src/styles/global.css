@@ -1,0 +1,25 @@
+
+:root {
+    /* serif fonts */
+    --sans-serif-font: "ui-sans-serif",sans-serif;
+    --inter-font: "Inter", var(--sans-serif-font);
+    --caption-font: "Atkinson Hyperlegible", var(--sans-serif-font);
+    /* mono font */
+    --monospace-font: "Fira Mono", monospace;
+
+
+    --bg-color: rgb(0,0,0);
+    --fg-color: rgb(255,255,255);
+
+    background-color: var(--bg-color);
+    color:var(--fg-color);
+
+    font-family: var(--inter-font);
+
+    overflow:scroll;
+    scrollbar-width:none;
+
+    padding: 0 30px;
+
+
+}
