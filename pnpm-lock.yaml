@@ -32,9 +32,6 @@ importers:
       astro:
         specifier: ^4.11.5
         version: 4.11.5(typescript@5.5.3)
-      astro-analytics:
-        specifier: ^2.7.0
-        version: 2.7.0
       lucide-astro:
         specifier: ^0.408.0
         version: 0.408.0(astro@4.11.5(typescript@5.5.3))
@@ -785,9 +782,6 @@ packages:
   astring@1.8.6:
     resolution: {integrity: sha512-ISvCdHdlTDlH5IpxQJIex7BWBywFWgjJSVdwst+/iQCoEYnyOaQ95+X1JGshuBjGp6nxKUy1jMgE3zPqN7fQdg==}
     hasBin: true
-
-  astro-analytics@2.7.0:
-    resolution: {integrity: sha512-/qctBn7LF9DS3ff2YYFrYtCkLLw2fboPDJUgg3HErygGbEBvebW/eGRftZH4ykDJhlCvwTsSEKz/vff7WllyAw==}
 
   astro@4.11.5:
     resolution: {integrity: sha512-TCRhuaLwrxwMhS8S1GG+ZTdrAXigX9C8E/YUTs/r2t+owHxDgwl86IV9xH1IHrCPoqhK6civyAQNOT+GKmkb0A==}
@@ -2895,8 +2889,6 @@ snapshots:
   array-iterate@2.0.1: {}
 
   astring@1.8.6: {}
-
-  astro-analytics@2.7.0: {}
 
   astro@4.11.5(typescript@5.5.3):
     dependencies:
