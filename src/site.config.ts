@@ -7,7 +7,7 @@ export const siteConfig = {
     url: 'https://kavin.is-a.dev',
 
     connect: {
-        email: '',
+        email: 'kavin6462@gmail.com',
         github: 'kavin81',
         leetcode:"",
         linkedin: '',
