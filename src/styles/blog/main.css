@@ -1,0 +1,40 @@
+/*
+    hero.css -> title,desc,metadata or blog
+    markdown/main.css -> styling markdown
+    footer.css -> styling footer of blog -- tags,last-updated
+*/
+
+@import url("./hero.css");
+@import url("./markdown/main.css");
+@import url("./footer.css");
+
+.blog_post {
+    width: 880px;
+    padding: 0 13rem;
+
+    h1 {
+        margin-bottom: 10px;
+
+        &.blog_title {
+            margin-top: 33.5px;
+        }
+    }
+}
+.content {
+    font-family: var(--inter-font);
+    color: rgb(209, 213, 219);
+}
+
+
+.article-age-warning p {
+    color:rgb(209, 213, 219);
+
+    & strong {
+        font-weight: 500;
+        color:inherit;
+
+        &::selection {
+            background-color: #6b4105;
+        }
+    }
+}

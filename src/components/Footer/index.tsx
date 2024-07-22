@@ -18,9 +18,9 @@ function Footer() {
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             >
                                 <rect
                                     width="20"
@@ -112,16 +112,16 @@ function Footer() {
                 <div className="footer_column">
                     <h4 className="footer_column_title">Pages</h4>
                     <ul>
-                        <li>
+                        <li key={0}>
                             <a href="/">Home</a>
                         </li>
-                        <li>
+                        <li key={1}>
                             <a href="/about">About</a>
                         </li>
-                        <li>
+                        <li key={2}>
                             <a href="/blogs">Blogs</a>
                         </li>
-                        <li>
+                        <li key={3}>
                             <a href="/projects">Projects</a>
                         </li>
                     </ul>

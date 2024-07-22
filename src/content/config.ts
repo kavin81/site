@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, getCollection, z } from "astro:content";
 
 
 /** Remove duplicates from array and converts all strings to lowercase */
@@ -10,7 +10,8 @@ function removeLowerCaseDups(array: string[]) {
 
 const blog = defineCollection({
 	type: "content",
-	schema: ({image}) => z.object({
+
+	schema: ({ image }) => z.object({
 		title: z.string().max(80),
 		desc: z.string().max(200),
 		publishedAt: z
@@ -18,13 +19,17 @@ const blog = defineCollection({
 			.transform(
 				(str) => new Date(str)
 			),
+		UpdatedAt: z
+			.string()
+			.transform(
+				(str) => new Date(str)
+			).optional(),
 		updatedAt: z
 			.string()
 			.optional()
 			.transform(
 				(str) => (str ? new Date(str) : undefined)
 			),
-		draft: z.boolean().default(false),
 		tags: z
 			.string()
 			.transform(
@@ -37,6 +42,14 @@ const blog = defineCollection({
 		hero_img: z.object({
 			src: image(),
 			alt: z.string(),
+			credit: z.object({
+				name: z.string().transform(
+					(val) => val.split(' ').map(
+						word => word.charAt(0).toUpperCase() + word.slice(1)
+					).join(' ')
+				),
+				url: z.string().url(),
+			})
 		}),
 	})
 });
@@ -44,7 +57,7 @@ const blog = defineCollection({
 // TODO: add needed meta-data for `/projects`
 const project = defineCollection({
 	type: "content",
-	// ({image}) => z.object({ image: image().optional()
+	// ({image}) => z.object({ image: image().optional()z.object({ image: image().optional()
 	schema: z.object({
 		title: z.string().max(80),
 	})

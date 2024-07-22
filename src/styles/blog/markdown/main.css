@@ -1,0 +1,103 @@
+@import url("./gh_alerts.css");
+@import url("./code.css");
+
+.content {
+    /* bold text */
+    strong {
+        font-weight: 600;
+    }
+    /* links */
+    a {
+        color: white;
+        text-decoration: underline white;
+        text-underline-offset: 3px;
+
+        text-decoration-thickness: 1.5px;
+
+        &:hover {
+            color: rgb(209, 213, 219);
+            text-decoration: underline rgb(209, 213, 219);
+        }
+    }
+    /* unordered list */
+    ul {
+        list-style-type: disc;
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        padding-inline-start: 1.625em;
+
+        li {
+            padding-inline-start: 0.375em;
+
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+
+            &::marker {
+                color: grey;
+            }
+        }
+    }
+    /* ordered list */
+    ol {
+        list-style-type: decimal;
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        padding-inline-start: 1.625em;
+
+        li {
+            padding-inline-start: 0.375em;
+
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+
+            &::marker {
+                color: rgb(165, 163, 163);
+            }
+        }
+    }
+    /* table */
+    table {
+        border-collapse: collapse;
+        border-spacing: 30px;
+
+        min-width: 50%;
+
+        th,
+        td {
+            padding: 15px 20px;
+            text-align: left;
+        }
+        th {
+            color: whitesmoke;
+            background-color: rgba(23, 23, 23, 0.4);
+            border-bottom: 1px solid var(--border-gray);
+
+            text-align: left;
+            font-weight: 500;
+        }
+        td {
+            border-bottom: 1px solid var(--border-gray);
+        }
+    }
+
+    code {
+        font-weight: 500;
+        font-size: 16px;
+        font-family: var(--monospace-font);
+        color: white;
+
+        /* inline */
+        &:not([data-theme]) {
+            &::before {
+                content: "`";
+            }
+            &::after {
+                content: "`";
+            }
+        }
+    }
+
+    hr {
+        border: 1px solid var(--border-gray);
+    }
+}

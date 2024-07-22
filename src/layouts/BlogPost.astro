@@ -2,38 +2,152 @@
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 
+import BaseLayout from "./BaseLayout.astro";
+import "../styles/blog/main.css";
+
 interface Props {
     post: CollectionEntry<"blog">;
 }
-
-import BaseLayout from "./BaseLayout.astro";
-
-const { post } = Astro.props;
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 const {
-    data: { title, desc, publishedAt, updatedAt, tags, draft, hero_img },
-    slug,
-} = post;
+    post: {
+        data: { title, desc, publishedAt, updatedAt, tags, hero_img },
+        slug,
+    },
+} = Astro.props;
 ---
 
-<BaseLayout meta={{title:title,desc:desc}}>
+<BaseLayout meta={{ title: title, desc: desc }}>
+    <div class="blog_post">
+        <h1 class="blog_title">{title}</h1>
+        <div class="metadata">
+            <span>
+                <svg
+                    height="16"
+                    stroke-linejoin="round"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    style="color: currentcolor;"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5.5 0.5V1.25V2H10.5V1.25V0.5H12V1.25V2H14H15.5V3.5V13.5C15.5 14.8807 14.3807 16 13 16H3C1.61929 16 0.5 14.8807 0.5 13.5V3.5V2H2H4V1.25V0.5H5.5ZM2 3.5H14V6H2V3.5ZM2 7.5V13.5C2 14.0523 2.44772 14.5 3 14.5H13C13.5523 14.5 14 14.0523 14 13.5V7.5H2Z"
+                        fill="currentColor"></path>
+                </svg>{" "}
+                {
+                    publishedAt.toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                    })
+                }{" "}
+            </span>
 
-    <h1>{title}</h1>
-    <h3>{desc}</h3>
-
-    <p>publishedAt: {publishedAt}</p>
-    <p>updatedAt: {updatedAt != undefined ? updatedAt : "never"}</p>
-    <code>draft: {draft}</code>
-
-    <br /><br />
-
-    <Image src={hero_img.src} alt={hero_img.alt} />
-    <ul>
-        <li>tags:</li>
-        <ul>
-            {tags.map((tag) => <li>{tag}</li>)}
-        </ul>
-    </ul>
-
-
+            <span>
+                <svg
+                    height="16"
+                    stroke-linejoin="round"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    style="color:currentColor;"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM8.75 4.75V4H7.25V4.75V7.875C7.25 8.18976 7.39819 8.48615 7.65 8.675L9.55 10.1L10.15 10.55L11.05 9.35L10.45 8.9L8.75 7.625V4.75Z"
+                        fill="currentColor"></path>
+                </svg>
+                {1} min read
+            </span>
+            <span>
+                <svg
+                    height="16"
+                    stroke-linejoin="round"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    style="color: currentcolor;"
+                    ><path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M10.8242 3H10.0742V4.5H10.8242H13.4382L8.49989 9.43829L6.207 7.14629C5.81645 6.75589 5.18339 6.75595 4.79292 7.14642L0.719662 11.2197L0.189331 11.75L1.24999 12.8107L1.78032 12.2803L5.50009 8.56057L7.79298 10.8526C8.18353 11.243 8.81659 11.2429 9.20706 10.8524L14.4988 5.56066V8.17462V8.92462H15.9988V8.17462V4C15.9988 3.44772 15.5511 3 14.9988 3H10.8242Z"
+                        fill="currentColor"></path></svg
+                >
+                {"1,000"} views
+            </span>
+        </div>
+        <p>{desc}</p>
+        <br />
+        <figure class="hero_img">
+            <Image src={hero_img.src} alt={hero_img.alt} />
+            <figcaption>
+                Image by <a href={hero_img.credit.url}>{hero_img.credit.name}</a
+                >
+            </figcaption>
+            {
+                dayjs(publishedAt).isBefore(dayjs().subtract(2, "year")) && (
+                    <br/>
+                    <div class="markdown-alert markdown-alert-warning article-age-warning">
+                        <p class="markdown-alert-title">
+                            <svg
+                                height="16"
+                                stroke-linejoin="round"
+                                style="width:16px;height:16px;color:#f2a20d"
+                                viewBox="0 0 16 16"
+                                overflow="visible"
+                                width="16"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M8.55846 2H7.44148L1.88975 13.5H14.1102L8.55846 2ZM9.90929 1.34788C9.65902 0.829456 9.13413 0.5 8.55846 0.5H7.44148C6.86581 0.5 6.34092 0.829454 6.09065 1.34787L0.192608 13.5653C-0.127943 14.2293 0.355835 15 1.09316 15H14.9068C15.6441 15 16.1279 14.2293 15.8073 13.5653L9.90929 1.34788ZM8.74997 4.75V5.5V8V8.75H7.24997V8V5.5V4.75H8.74997ZM7.99997 12C8.55226 12 8.99997 11.5523 8.99997 11C8.99997 10.4477 8.55226 10 7.99997 10C7.44769 10 6.99997 10.4477 6.99997 11C6.99997 11.5523 7.44769 12 7.99997 12Z"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                        </p>
+                        <p>
+                            This article is{" "}
+                            <strong>{new Date().getFullYear() -
+                                publishedAt.getFullYear()}{" "}
+                            yrs</strong> old. Some info might be  outdated.
+                        </p>
+                    </div>
+                )
+            }
+        </figure>
+        <div class="content">
+            <slot />
+        </div>
+        <br>
+        <div class="updated_at">
+            {
+                updatedAt ? (
+                    <p>
+                        Last updated on
+                        {updatedAt.toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                        })}
+                    </p>
+                ) : (
+                    <p>{dayjs(publishedAt).fromNow(true)} since last update</p>
+                )
+            }
+        </div>
+        {
+            tags && (
+                <div class="tags">
+                    {tags.map((tag) => (
+                        <a class="tag" href={`/tags/${tag}`}>
+                            {tag}
+                        </a>
+                    ))}
+                </div>
+            )
+        }
+    </div>
 </BaseLayout>

@@ -21,11 +21,6 @@
     overflow:scroll;
     scrollbar-width:none;
 
+
     padding: 0 30px;
-
-
-}
-
-hr {
-    border: 1px solid var(--border-gray);
 }
