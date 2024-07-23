@@ -28,6 +28,7 @@
 
             code {
                 padding: 15px 0;
+                background-color: #0a0a0a;
                 /* display: relative; */
                 overflow-y: auto;
                 scrollbar-color: #303030 #000000;

@@ -1,23 +1,20 @@
+import fs from "fs"
+
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import react from "@astrojs/react";
 import cloudflare from '@astrojs/cloudflare';
 
-// need to implement rss at some point
-
-// Code Block Theme
-import syntaxTheme from "./public/seti-black.json";
-
 // rehype plugins
 import { rehypePrettyCode, type Options } from "rehype-pretty-code";
 import { transformerCopyButton } from '@rehype-pretty/transformers'
 import { rehypeGithubAlerts, type IOptions } from "rehype-github-alerts"
 
-
+const syntaxTheme = JSON.parse(fs.readFileSync("./public/seti-black.json", "utf-8"))
 
 export default defineConfig({
-    site: "https://example.com",
+    site: "https://kavin.is-a.dev",
     markdown: {
         syntaxHighlight: false,
         rehypePlugins: [
@@ -26,7 +23,6 @@ export default defineConfig({
                     theme: syntaxTheme,
                     transformers: [
                         transformerCopyButton({
-
                             visibility: "hover",
                             feedbackDuration: 3_000,
                             copyIcon:

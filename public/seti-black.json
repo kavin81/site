@@ -1,51 +1,41 @@
 {
 	"$schema": "vscode://schemas/color-theme",
-	"type": "dark",
-	"colors": {
-		"badge.background": "#000000",
-		"button.background": "#000000",
-		"editor.background": "#0a0a0a",
-		"editor.foreground": "#d7d7d7",
-		"editor.lineHighlightBackground": "#333333",
-		"editor.selectionBackground": "#444444",
-		"editorCursor.foreground": "#ff8801",
-		"editorGroupHeader.tabsBackground": "#000000",
-		"editorWhitespace.foreground": "#3b3a32",
-		"input.background": "#000000",
-		"list.focusBackground": "#333333",
-		"list.inactiveFocusBackground": "#444444",
-		"list.inactiveSelectionBackground": "#000000",
-		"menu.background": "#000000",
-		"tab.inactiveBackground": "#101010",
-		"titleBar.activeBackground": "#000000",
-		"titleBar.inactiveBackground": "#101010"
-	},
 	"tokenColors": [
 		{
+			"settings": {
+				"foreground": "#D7D7D7"
+			}
+		},
+		{
+			"name": "Comment",
 			"scope": "comment",
 			"settings": {
 				"foreground": "#677A83"
 			}
 		},
 		{
+			"name": "String",
 			"scope": "string",
 			"settings": {
 				"foreground": "#E6DB74"
 			}
 		},
 		{
+			"name": "Number",
 			"scope": "constant.numeric",
 			"settings": {
 				"foreground": "#AE81FF"
 			}
 		},
 		{
+			"name": "Built-in constant",
 			"scope": "constant.language",
 			"settings": {
 				"foreground": "#AE81FF"
 			}
 		},
 		{
+			"name": "User-defined constant",
 			"scope": [
 				"constant.character",
 				"constant.other"
@@ -55,138 +45,154 @@
 			}
 		},
 		{
+			"name": "Variable",
 			"scope": "variable",
 			"settings": {
 				"fontStyle": ""
 			}
 		},
 		{
+			"name": "Keyword",
 			"scope": "keyword",
 			"settings": {
 				"foreground": "#F92672"
 			}
 		},
 		{
+			"name": "Storage",
 			"scope": "storage",
 			"settings": {
-				"foreground": "#F92672",
-				"fontStyle": ""
+				"fontStyle": "",
+				"foreground": "#F92672"
 			}
 		},
 		{
+			"name": "Storage type",
 			"scope": "storage.type",
 			"settings": {
-				"foreground": "#66D9EF",
-				"fontStyle": "italic"
+				"fontStyle": "italic",
+				"foreground": "#66D9EF"
 			}
 		},
 		{
+			"name": "Class name",
 			"scope": "entity.name.class",
 			"settings": {
-				"foreground": "#A6E22E",
-				"fontStyle": "underline"
+				"fontStyle": "underline",
+				"foreground": "#A6E22E"
 			}
 		},
 		{
+			"name": "Inherited class",
 			"scope": "entity.other.inherited-class",
 			"settings": {
-				"foreground": "#A6E22E",
-				"fontStyle": "italic underline"
+				"fontStyle": "italic underline",
+				"foreground": "#A6E22E"
 			}
 		},
 		{
+			"name": "Function name",
 			"scope": "entity.name.function",
 			"settings": {
-				"foreground": "#A6E22E",
-				"fontStyle": ""
+				"fontStyle": "",
+				"foreground": "#A6E22E"
 			}
 		},
 		{
+			"name": "Function argument",
 			"scope": "variable.parameter",
 			"settings": {
-				"foreground": "#FD971F",
-				"fontStyle": "italic"
+				"fontStyle": "italic",
+				"foreground": "#FD971F"
 			}
 		},
 		{
+			"name": "Tag name",
 			"scope": "entity.name.tag",
 			"settings": {
-				"foreground": "#F92672",
-				"fontStyle": ""
+				"fontStyle": "",
+				"foreground": "#F92672"
 			}
 		},
 		{
+			"name": "Tag attribute",
 			"scope": "entity.other.attribute-name",
 			"settings": {
-				"foreground": "#A6E22E",
-				"fontStyle": ""
+				"fontStyle": "",
+				"foreground": "#A6E22E"
 			}
 		},
 		{
+			"name": "Library function",
 			"scope": "support.function",
 			"settings": {
-				"foreground": "#66D9EF",
-				"fontStyle": ""
+				"fontStyle": "",
+				"foreground": "#66D9EF"
 			}
 		},
 		{
+			"name": "Library constant",
 			"scope": "support.constant",
 			"settings": {
-				"foreground": "#66D9EF",
-				"fontStyle": ""
+				"fontStyle": "",
+				"foreground": "#66D9EF"
 			}
 		},
 		{
+			"name": "Library type",
 			"scope": "support.type",
 			"settings": {
-				"foreground": "#6CA9E1",
-				"background": "#202D3B",
-				"fontStyle": "italic"
+				"fontStyle": "italic",
+				"foreground": "#6CA9E1"
 			}
 		},
 		{
+			"name": "User setting",
 			"scope": "support.setting",
 			"settings": {
-				"foreground": "#6CE184",
-				"background": "#152718",
-				"fontStyle": "italic"
+				"fontStyle": "italic",
+				"foreground": "#6CE184"
 			}
 		},
 		{
+			"name": "Library class",
 			"scope": "support.class",
 			"settings": {
-				"foreground": "#66D9EF",
-				"fontStyle": "italic"
+				"fontStyle": "italic",
+				"foreground": "#66D9EF"
 			}
 		},
 		{
+			"name": "Library variable",
 			"scope": "support.other.variable",
 			"settings": {
 				"fontStyle": ""
 			}
 		},
 		{
+			"name": "Invalid",
 			"scope": "invalid",
 			"settings": {
-				"foreground": "#F8F8F0",
-				"background": "#F92672",
-				"fontStyle": ""
+				"fontStyle": "",
+				"foreground": "#F8F8F0"
 			}
 		},
 		{
+			"name": "Invalid deprecated",
 			"scope": "invalid.deprecated",
 			"settings": {
-				"foreground": "#F8F8F0",
-				"background": "#AE81FF"
+				"foreground": "#F8F8F0"
 			}
 		},
 		{
+			"name": "JSON String",
 			"scope": "meta.structure.dictionary.json string.quoted.double.json",
 			"settings": {
 				"foreground": "#CFCFC2"
 			}
 		},
 		{
+			"name": "diff.header",
 			"scope": [
 				"meta.diff",
 				"meta.diff.header"
@@ -196,24 +202,28 @@
 			}
 		},
 		{
+			"name": "diff.deleted",
 			"scope": "markup.deleted",
 			"settings": {
 				"foreground": "#F92672"
 			}
 		},
 		{
+			"name": "diff.inserted",
 			"scope": "markup.inserted",
 			"settings": {
 				"foreground": "#A6E22E"
 			}
 		},
 		{
+			"name": "diff.changed",
 			"scope": "markup.changed",
 			"settings": {
 				"foreground": "#E6DB74"
 			}
 		},
 		{
+			"name": "Embedded String Begin/End",
 			"scope": [
 				"string.embedded.begin",
 				"string.embedded.end",
@@ -221,10 +231,11 @@
 				"punctuation.section.embedded"
 			],
 			"settings": {
-				"foreground": "#C678DD"
+				"foreground": "#c678dd"
 			}
 		},
 		{
+			"name": "Variable Object",
 			"scope": [
 				"variable.other.object",
 				"variable.other.constant",
@@ -236,32 +247,12 @@
 				"variable.readwrite.other.block"
 			],
 			"settings": {
-				"foreground": "#61AFEF"
-			}
-		},
-		{
-			"scope": "token.info-token",
-			"settings": {
-				"foreground": "#6796E6"
-			}
-		},
-		{
-			"scope": "token.warn-token",
-			"settings": {
-				"foreground": "#CD9731"
-			}
-		},
-		{
-			"scope": "token.error-token",
-			"settings": {
-				"foreground": "#F44747"
-			}
-		},
-		{
-			"scope": "token.debug-token",
-			"settings": {
-				"foreground": "#B267E6"
+				"foreground": "#61afef"
 			}
 		}
-	]
+	],
+	"colors": {
+		"editor.foreground": "#D7D7D7"
+	},
+	"name": "Seti Black"
 }
