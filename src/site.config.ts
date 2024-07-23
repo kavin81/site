@@ -24,5 +24,6 @@ export const siteConfig = {
 
     lang: 'en-US',
 
+    umami_id: '8c4cdc97-846c-485e-b52b-73bcaa4dabc5',
     // datefmt: 'MMMM dd, yyyy',
 }

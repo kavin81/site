@@ -1,11 +1,8 @@
 import { defineCollection, getCollection, z } from "astro:content";
 
-
-/** Remove duplicates from array and converts all strings to lowercase */
 function removeLowerCaseDups(array: string[]) {
 	return [...new Set(array.map(str => str.toLowerCase()))];
 }
-
 
 
 const blog = defineCollection({

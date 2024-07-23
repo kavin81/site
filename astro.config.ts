@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import react from "@astrojs/react";
 import cloudflare from '@astrojs/cloudflare';
 
-// rehype plugins
+
 import { rehypePrettyCode, type Options } from "rehype-pretty-code";
 import { transformerCopyButton } from '@rehype-pretty/transformers'
 import { rehypeGithubAlerts, type IOptions } from "rehype-github-alerts"
@@ -76,7 +76,7 @@ export default defineConfig({
         react()
     ],
     adapter: cloudflare({
-        imageService: "cloudflare",
+        imageService: "compile",
     }),
     output: 'server',
 });
