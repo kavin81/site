@@ -36,5 +36,8 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "velite": "^0.2.4"
+  },
+  "engines": {
+    "node": "20.11.0"
   }
 }
