@@ -1,3 +1,6 @@
+export const runtime = 'edge';
+
+
 import { notFound } from "next/navigation";
 import { posts } from "@/data";
 import Image from "next/image";
@@ -137,6 +140,6 @@ export default async function PostPage({ params }: PostProps) {
     );
 }
 
-export function generateStaticParams() {
-    return posts.map(post => ({ slug: post.slug }));
-}
+// export function generateStaticParams() {
+//     return posts.map(post => ({ slug: post.slug }));
+// }
