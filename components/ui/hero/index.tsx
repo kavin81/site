@@ -1,10 +1,12 @@
-import { IoLogoGithub } from "react-icons/io";
-import { RiAttachment2 } from "react-icons/ri";
+import dynamic from "next/dynamic";
 import { siteConfig } from "@/lib/siteConfig";
 
 import "./hero.css";
 import Link from "next/link";
 import Image from "next/image";
+
+const IoLogoGithub = dynamic(() => import("react-icons/io").then((mod) => mod.IoLogoGithub));
+const RiAttachment2 = dynamic(() => import("react-icons/ri").then((mod) => mod.RiAttachment2));
 
 export default function Hero() {
     return (

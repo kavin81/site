@@ -1,9 +1,13 @@
-import { IoLogoGithub } from "react-icons/io";
-import { FaLinkedin, FaDiscord, FaTwitter } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import dynamic from 'next/dynamic';
 
 import { siteConfig } from "@/lib/siteConfig";
 const { social } = siteConfig;
+
+const IoLogoGithub = dynamic(() => import('react-icons/io').then(mod => mod.IoLogoGithub));
+const FaLinkedin = dynamic(() => import('react-icons/fa').then(mod => mod.FaLinkedin));
+const FaDiscord = dynamic(() => import('react-icons/fa').then(mod => mod.FaDiscord));
+const FaTwitter = dynamic(() => import('react-icons/fa').then(mod => mod.FaTwitter));
+const MdEmail = dynamic(() => import('react-icons/md').then(mod => mod.MdEmail));
 
 export default function Footer() {
     return (
