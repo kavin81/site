@@ -15,8 +15,6 @@ const withAnalyzer = withBundleAnalyzer({
 
 const nextConfig = {
 
-  distDir: 'dist',
-  // modularizeImports: {}, // Ensures only used imports are included (for supported libraries)
   // webpack(config: any) {
   //   config.optimization.splitChunks = {
   //     chunks: 'all',
