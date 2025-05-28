@@ -1,0 +1,145 @@
+@import "./mdAlerts.css";
+@import "./codeblocks.css";
+
+.content {
+    color: #d1d5db;
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-weight: bold;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+        font-size: 2em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+    }
+
+    h2 {
+        margin-bottom: 8px;
+        font-size: 1.5em;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+    }
+
+    h3 {
+        font-size: 1.17em;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+    }
+
+    h4 {
+        margin-block-start: 1.33em;
+        margin-block-end: 1.33em;
+    }
+
+    hr {
+        border: 1px solid rgb(31, 31, 31);
+    }
+
+    p {
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+    }
+    /* bold text */
+    strong {
+        font-weight: 600;
+    }
+    /* links */
+    a {
+        color: white;
+        text-decoration: underline white;
+        text-underline-offset: 3px;
+
+        text-decoration-thickness: 1.5px;
+
+        &:hover {
+            color: rgb(209, 213, 219);
+            text-decoration: underline rgb(209, 213, 219);
+        }
+    }
+    /* unordered list */
+    ul {
+        list-style-type: disc;
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        padding-inline-start: 1.625em;
+
+        li {
+            padding-inline-start: 0.375em;
+
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+
+            &::marker {
+                color: grey;
+            }
+        }
+    }
+    /* ordered list */
+    ol {
+        list-style-type: decimal;
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        padding-inline-start: 1.625em;
+
+        li {
+            padding-inline-start: 0.375em;
+
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+
+            &::marker {
+                color: rgb(165, 163, 163);
+            }
+        }
+    }
+    /* table */
+    table {
+        border-collapse: collapse;
+        border-spacing: 30px;
+
+        min-width: 50%;
+
+        th,
+        td {
+            padding: 15px 20px;
+            text-align: left;
+        }
+        th {
+            color: whitesmoke;
+            background-color: rgba(23, 23, 23, 0.4);
+            border-bottom: 1px solid rgb(31, 31, 31);
+
+            text-align: left;
+            font-weight: 500;
+        }
+        td {
+            border-bottom: 1px solid rgb(31, 31, 31);
+        }
+    }
+
+    code {
+        font-weight: 450;
+        font-size: 16px;
+        font-family: "Fira Code", monospace;
+        color: white;
+
+        /* inline */
+        &:not([data-theme]) {
+            &::before {
+                content: "`";
+            }
+            &::after {
+                content: "`";
+            }
+        }
+    }
+
+    hr {
+        border: 1px solid rgb(31, 31, 31);
+    }
+}

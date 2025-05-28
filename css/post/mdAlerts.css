@@ -1,0 +1,125 @@
+.markdown-alert {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 6px;
+    border: 1.5px solid #2e2e2e;
+
+    background-color: #0a0a0a;
+
+    & > :first-child {
+        margin-top: 0;
+    }
+
+    & > :last-child {
+        margin-bottom: 0;
+    }
+
+    p {
+        padding: 14px 0;
+
+        &.markdown-alert-title {
+            padding-left: 12px;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+
+            & > svg {
+                margin-right: 12px;
+            }
+        }
+
+        &:not(.markdown-alert-title) {
+            margin-top: 0;
+            padding-right: 12px;
+            font-size: 14px;
+
+            code {
+                font-size: inherit;
+            }
+        }
+    }
+    &.markdown-alert-note {
+        border: 2px solid #0d3868;
+        p {
+            &::selection,
+            code::selection {
+                background-color: #0d3868;
+            }
+        }
+    }
+    &.markdown-alert-tip {
+        border: 2px solid #0c451b;
+        p {
+            &::selection,
+            code::selection {
+                background-color: #1a9338;
+            }
+        }
+    }
+    &.markdown-alert-important {
+        border: 2px solid #4f2768;
+        p {
+            &::selection,
+            code::selection {
+                background-color: #8e4ec6;
+            }
+        }
+    }
+    &.markdown-alert-warning {
+        border: 2px solid #7d4a02;
+        p {
+            &::selection,
+            code::selection {
+                background-color: #6b4105;
+            }
+        }
+    }
+    &.markdown-alert-caution {
+        border: 2px solid #671e21;
+        p {
+            &::selection,
+            code::selection {
+                background-color: #d93036;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .markdown-alert {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 14px;
+        padding: 0 8px;
+    }
+    .markdown-alert p {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+    .markdown-alert p.markdown-alert-title {
+        padding-left: 6px;
+        font-size: 15px;
+    }
+    .markdown-alert p:not(.markdown-alert-title) {
+        padding-right: 6px;
+        font-size: 13px;
+    }
+    .markdown-alert p code {
+        font-size: 13px;
+    }
+}
+@media (max-width: 400px) {
+    .markdown-alert {
+        font-size: 13px;
+        padding: 0 2px;
+    }
+    .markdown-alert p {
+        font-size: 13px;
+    }
+    .markdown-alert p.markdown-alert-title {
+        font-size: 14px;
+    }
+}

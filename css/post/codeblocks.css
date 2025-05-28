@@ -1,0 +1,142 @@
+.content {
+    figure[data-rehype-pretty-code-figure] {
+        margin: 0;
+        /* file name */
+        figcaption[data-rehype-pretty-code-title] {
+            color: rgb(161, 161, 161);
+            border: 1px solid #2e2e2e;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+
+            padding: 0 12px 0 16px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        pre {
+            border: 1px solid #2e2e2e;
+            border-radius: 6px;
+
+            overflow: hidden;
+
+            figcaption[data-rehype-pretty-code-title] + & {
+                border-radius: 0 0 6px 6px;
+                margin-top: 0;
+            }
+
+            code {
+                padding: 15px 0;
+                background-color: #0a0a0a;
+                /* display: relative; */
+                overflow-y: auto;
+                scrollbar-color: #303030 #000000;
+
+                /* highlighted lines */
+                & span[data-highlighted-line] {
+                    position: relative;
+                    background-color: rgb(15, 47, 87);
+
+                    &::after {
+                        position: absolute;
+                        background: rgb(82, 168, 255);
+                        width: 2px;
+
+                        content: "";
+                        left: 0;
+                        top: 0;
+                        bottom: 0;
+                    }
+                }
+
+                /* line numbers */
+                &[data-line-numbers] {
+                    counter-reset: step;
+                    counter-increment: step 0;
+
+                    span[data-line] {
+                        &::before {
+                            content: counter(step);
+                            counter-increment: step;
+
+                            width: 18px;
+                            margin-right: 20px;
+
+                            text-align: right;
+                            color: #878787;
+                            display: inline-block;
+                        }
+                    }
+                }
+                span[data-line] {
+                    padding: 0 20px;
+                }
+
+                /* copy-btn */
+                button.rehype-pretty-copy {
+                    margin: 12px;
+                    right: 0;
+                    top: 0;
+
+                    height: 30px;
+                    width: 30px;
+
+                    background-color: transparent;
+                    backdrop-filter: unset;
+
+                    .ready,
+                    .success {
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 75%;
+
+                        border-radius: 6px;
+                        &:hover {
+                            background-color: rgba(255, 255, 255, 0.2);
+                        }
+                    }
+
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .content figure[data-rehype-pretty-code-figure] {
+        font-size: 14px;
+    }
+    .content figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] {
+        padding: 0 8px 0 10px;
+        height: 38px;
+        font-size: 13px;
+    }
+    .content figure[data-rehype-pretty-code-figure] pre {
+        font-size: 13px;
+    }
+    .content figure[data-rehype-pretty-code-figure] pre code {
+        padding: 10px 0;
+        font-size: 13px;
+        word-break: break-word;
+    }
+    .content figure[data-rehype-pretty-code-figure] pre code span[data-line] {
+        padding: 0 10px;
+    }
+    .content figure[data-rehype-pretty-code-figure] pre code button.rehype-pretty-copy {
+        margin: 6px;
+        height: 28px;
+        width: 28px;
+    }
+}
+@media (max-width: 400px) {
+    .content figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] {
+        font-size: 12px;
+        height: 32px;
+        padding: 0 4px 0 6px;
+    }
+    .content figure[data-rehype-pretty-code-figure] pre code {
+        font-size: 12px;
+    }
+}

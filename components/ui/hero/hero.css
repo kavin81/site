@@ -1,0 +1,7 @@
+.fancy_highlight::after {
+    background: url("/fancy_highlight.svg") no-repeat 0% 0% / 100% 100%;
+    content: "";
+    position: absolute;
+    inset: auto -0.2em -0.15em -0.2em;
+    height: 0.3em;
+}

@@ -1,0 +1,7 @@
+.nav-links:hover {
+    color: #fffc;
+    text-decoration: underline rgba(255, 255, 255, 0.8) 1.5px;
+    text-underline-offset: 2px;
+    text-shadow: 0 2px 18px #fff6;
+    transition: all 10ms linear;
+}

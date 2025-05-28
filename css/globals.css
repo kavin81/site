@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+    --font-serif: "Inter", sans-serif;
+    --font-mono: "Fira Mono", monospace;
+    --background: black;
+    --foreground: white;
+}
+@theme {
+    --breakpoint-xs: 431px;
+}
+
+@layer utilities {
+    .font-mono {
+        font-family: var(--font-mono);
+    }
+}
+
+@layer base {
+    html,
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-serif);
+        margin: 0;
+
+        /* @apply max-xs:text-[18px]; */
+    }
+    h1 {
+        @apply text-3xl lg:text-5xl font-bold space-y-10 space-y-reverse; /* IGNORE */
+    }
+
+    a.link {
+        cursor: pointer;
+
+        font-family: var(--font-mono);
+        font-weight: 500;
+
+        text-underline-offset: 2px;
+        text-decoration: underline #525252;
+    }
+
+    a.button {
+        background-color: #0a0a0a;
+        border: 2px solid rgb(31, 31, 31);
+
+        font-family: var(--font-mono);
+
+        display: inline-flex;
+        padding: 8px;
+        justify-content: space-between;
+        text-align: start;
+
+        &:hover {
+            background-color: #1f1f1f;
+            border: 1.5px solid #323232;
+        }
+
+        svg {
+            margin-left: 15px;
+        }
+        svg.tmp_class {
+            margin-left: 0;
+            margin-right: 5px;
+        }
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
