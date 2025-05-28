@@ -4,12 +4,21 @@ const isDev = process.argv.indexOf("dev") !== -1;
 const isBuild = process.argv.indexOf("build") !== -1;
 
 if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
-    process.env.VELITE_STARTED = "1";
-    import("velite").then(m => m.build({ watch: isDev, clean: !isDev }));
+  process.env.VELITE_STARTED = "1";
+  import("velite").then(m => m.build({ watch: isDev, clean: !isDev }));
 }
 
 const nextConfig: NextConfig = {
   distDir: 'dist',
+  webpack(config) {
+    config.optimization.splitChunks = {
+      chunks: 'all',
+      minSize: 20000,
+      maxSize: 25000, // optional max chunk size
+      automaticNameDelimiter: '-',
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
