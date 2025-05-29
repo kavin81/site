@@ -1,9 +1,8 @@
 export const runtime = 'edge';
 
-
 import { notFound } from "next/navigation";
-import { posts } from "@/data";
 import Image from "next/image";
+
 
 import "@/css/post/main.css";
 
@@ -11,42 +10,18 @@ interface PostProps {
     params: Promise<{ slug: string }>;
 }
 
-function getPostBySlug(slug: string) {
-    return posts.find(post => post.slug === slug);
-}
-
 export default async function PostPage({ params }: PostProps) {
     const { slug } = await params;
-    const post = getPostBySlug(slug);
+    // Dynamically import posts and helpers for code splitting
+    const [{ default: posts }, helpers] = await Promise.all([
+        import("@/data/posts.json"),
+        import("@/lib/postHelpers.js")
+    ]);
+    const post = helpers.getPostBySlug(posts, slug);
 
     if (post == null) return notFound();
 
     post.publishedAt = new Date(post.publishedAt);
-
-    // Helper: returns true if publishedAt is more than 2 years ago
-    function isOlderThan2Years(date: Date) {
-        const now = new Date();
-        const twoYearsAgo = new Date(now.getFullYear() - 2, now.getMonth(), now.getDate());
-        return date < twoYearsAgo;
-    }
-
-    // Helper: returns human readable relative time (e.g. '2 years ago')
-    function timeAgo(date: Date) {
-        const now = new Date();
-        const diff = now.getTime() - date.getTime();
-        const seconds = Math.floor(diff / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(days / 365);
-        if (years > 0) return years + (years === 1 ? " year" : " years") + " ago";
-        if (months > 0) return months + (months === 1 ? " month" : " months") + " ago";
-        if (days > 0) return days + (days === 1 ? " day" : " days") + " ago";
-        if (hours > 0) return hours + (hours === 1 ? " hour" : " hours") + " ago";
-        if (minutes > 0) return minutes + (minutes === 1 ? " minute" : " minutes") + " ago";
-        return "just now";
-    }
 
     return (
         <>
@@ -69,7 +44,7 @@ export default async function PostPage({ params }: PostProps) {
                             </a>
                         </figcaption>
 
-                        {isOlderThan2Years(post.publishedAt) && (
+                        {helpers.isOlderThan2Years(post.publishedAt) && (
                             <>
                                 <br />
                                 <div className="markdown-alert markdown-alert-warning article-age-warning">
@@ -122,14 +97,14 @@ export default async function PostPage({ params }: PostProps) {
                         </p>
                     ) : (
                         <p>
-                            {timeAgo(post.publishedAt)} since last update
+                            {helpers.timeAgo(post.publishedAt)} since last update
                         </p>
                     )}
                 </div>
             )}
             {post && post.tags && (
                 <div className="tags">
-                    {post.tags.map(tag => (
+                    {(post.tags as string[]).map((tag: string) => (
                         <a className="tag" key={tag}>
                             {tag}
                         </a>
@@ -139,7 +114,3 @@ export default async function PostPage({ params }: PostProps) {
         </>
     );
 }
-
-// export function generateStaticParams() {
-//     return posts.map(post => ({ slug: post.slug }));
-// }
