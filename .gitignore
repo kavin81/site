@@ -1,0 +1,20 @@
+# environment variables
+.env
+!.env.demo
+
+
+# astro artifacts
+.astro/
+.cache/
+
+# node.js
+node_modules/
+dist/
+
+
+
+# system files
+.DS_Store
+Thumbs.db
+desktop.ini
+*~.swp
