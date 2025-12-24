@@ -1,12 +1,33 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import react from "@astrojs/react";
-import sitemap from "@astrojs/sitemap";
+import { remarkReadingTime } from "./src/utils/remark-reading-time.js"
 
-// https://astro.build/config
+import react from "@astrojs/react";
+import tailwindcss from "@tailwindcss/vite";
+
+
 export default defineConfig({
-  integrations: [
-    react(),
-    sitemap(),
-  ],
+    markdown: {
+        remarkPlugins: [
+            remarkReadingTime,
+        ],
+    },
+
+    integrations: [
+        react()
+    ],
+
+    vite: {
+        server: {
+            strictPort: true,
+            port: 3000,
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST"],
+            },
+            open: true,
+        },
+
+        // @ts-expect-error
+        plugins: [tailwindcss()],
+    },
 });

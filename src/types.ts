@@ -11,6 +11,7 @@ const SocialSchema = z.object({
 
 const ConfigSchema = z.object({
     siteName: z.string(),
+    siteTitle: z.string(),
     siteURL: z.url().refine(
         (url) => url.startsWith("https:"),
         { message: "Site URL must use https: scheme" }
@@ -18,6 +19,7 @@ const ConfigSchema = z.object({
     siteAuthor: z.string(),
     siteDescription: z.string(),
     siteSocials: z.array(SocialSchema),
+    siteAnalyticsID: z.string().describe("umami ID"),
 });
 
 export { ConfigSchema };

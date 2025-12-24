@@ -7,19 +7,28 @@ export interface Props {
 
 export async function getStaticPaths() {
     const posts = await getCollection("posts");
-    const postResult = posts.map(post => ({
+
+    return posts.map(post => ({
         params: { slug: post.slug },
         props: { post },
     }));
-
-    return postResult;
 }
 
-const { post } = Astro.props;
-const { Content } = await post.render();
+const post = Astro.props?.post;
+if (!post) {
+    throw new Error("Post prop is missing");
+}
+
+const {
+    Content,
+    remarkPluginFrontmatter: { time2read },
+} = await post.render();
+
+post.data.time2read = time2read;
 ---
 
 <>
     <h1>{post.data.title}</h1>
-    <Content />
+    <pre><code>{JSON.stringify(post.data, null, 2)}</code></pre>
 </>
+<Content />

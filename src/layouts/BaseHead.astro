@@ -1,0 +1,79 @@
+---
+const { siteTitle, siteDesc, ArticleDate } = Astro.props;
+import { config } from "~/config";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta
+    content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    name="viewport"
+/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<title>{siteTitle}</title>
+
+<!-- google fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin="anonymous"
+/>
+<!-- IBM Plex Sans & Fira Code  -->
+<link
+    media="print"
+    rel="stylesheet"
+    onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+/>
+
+<!-- analytics -->
+<script
+    is:inline
+    defer
+    src="https://cloud.umami.is/script.js"
+    data-website-id={config.siteAnalyticsID}></script>
+
+<!-- icons TODO: better favicon-->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+
+<!-- basic meta-tags -->
+<meta content={siteTitle} name="title" />
+<meta content={siteDesc} name="description" />
+<meta content={config.siteAuthor} name="author" />
+
+<!-- open-graph/fb -->
+<meta content={ArticleDate ? "article" : "website"} property="og:type" />
+<meta content={siteTitle} property="og:title" />
+<meta content={siteDesc} property="og:description" />
+<meta content={canonicalURL} property="og:url" />
+<meta content={config.siteTitle} property="og:site_name" />
+<meta content="en" property="og:locale" />
+<!-- <meta content={socialImageURL} property="og:image" /> -->
+<meta content="1200" property="og:image:width" />
+<meta content="630" property="og:image:height" />
+{
+    ArticleDate && (
+        <>
+            <meta content={config.siteAuthor} property="article:author" />
+            <meta content={ArticleDate} property="article:published_time" />
+        </>
+    )
+}
+
+<!-- twitter -->
+<meta content="summary_large_image" property="twitter:card" />
+<meta content={canonicalURL} property="twitter:url" />
+<meta content={siteTitle} property="twitter:title" />
+<meta content={siteDesc} property="twitter:description" />
+<!-- <meta content={socialImageURL} property="twitter:image" /> -->
+
+<!-- sitemap -->
+<link href="/sitemap-index.xml" rel="sitemap" />
+
+<!-- rss-feed -->
+<!-- title={siteConfig.title} -->
+<link href="/rss.xml" rel="alternate" type="application/rss+xml" title={config.siteName} />
