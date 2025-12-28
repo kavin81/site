@@ -1,7 +1,7 @@
 import { ConfigSchema } from "~/types"
 
 export const config = ConfigSchema.parse({
-    siteName: "placeholder",
+    siteName: "kavin",
     siteTitle: "placeholder",
     siteAuthor: "placeholder",
     siteDescription: "placeholder",
@@ -17,7 +17,27 @@ export const config = ConfigSchema.parse({
             url: "https://linkedin.com/in/kavin81",
             username: "kavin81",
         },
+        {
+            label: "Email",
+            url: "mailto:kavin.srinivasan2@gmail.com",
+            username: "kavin.srinivasan2@gmail.com",
+        }
     ],
     siteAnalyticsID: "placeholder-analytics-id",
+
+    siteHeader: [
+        {
+            label: "posts",
+            url: "/posts",
+        },
+        {
+            label: "whoami",
+            url: "/whoami",
+        },
+        {
+            label: "links",
+            url: "/urls",
+        }
+    ]
 
 })

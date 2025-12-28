@@ -1,0 +1,16 @@
+---
+    title: Zero-Downtime Migrations
+    description: Practical tactics for evolving schemas without interrupting traffic.
+    tags: ["databases", "migrations", "devops"]
+    publishedAt: 2024-04-18
+    cover: images/cover1.1
+
+---
+
+## Expand and Contract
+
+Stage schema changes by adding new structures first, dual-writing during the transition, and contracting legacy columns only after verifying consumers move off.
+
+## Observability Is a Feature
+
+Monitor query mix, error envelopes, and replication delay throughout the rollout to ensure the plan matches production reality.

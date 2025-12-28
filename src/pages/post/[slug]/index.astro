@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
+import PostLayout from "~/layouts/PostLayout.astro";
 
 export interface Props {
     post: CollectionEntry<"posts">;
@@ -20,15 +21,10 @@ if (!post) {
 }
 
 const {
-    Content,
     remarkPluginFrontmatter: { time2read },
 } = await post.render();
 
 post.data.time2read = time2read;
 ---
 
-<>
-    <h1>{post.data.title}</h1>
-    <pre><code>{JSON.stringify(post.data, null, 2)}</code></pre>
-</>
-<Content />
+<PostLayout post={post} />

@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@plugin 'tailwind-scrollbar';
+
+@theme {
+    /* standard font */
+    --font-ibm-plex-sans: "IBM Plex Sans", sans-serif;
+    /* monospace font */
+    --font-fira-code: "Fira Code", monospace;
+    /* sharp font (used in small capacity) */
+    --font-roboto-slab: "Roboto Slab", serif;
+
+    --color-fg-primary: rgba(224, 224, 224, 1);
+    --color-fg-secondary: rgba(82, 82, 82, 0.75);
+
+    --color-border: rgba(64, 64, 64, 1);
+    --color-bg-primary: rgba(18, 18, 18, 1);
+}
+
+@layer base {
+    /* scrollbar */
+    html {
+        @apply overflow-auto scrollbar-thin scrollbar-track-bg-primary scrollbar-thumb-fg-secondary;
+    }
+
+    :root {
+        color-scheme: dark;
+        color: var(--color-fg-primary);
+        background-color: var(--color-bg-primary);
+
+        h1,
+        h2,
+        h3 {
+            @apply font-fira-code tracking-tight font-semibold;
+        }
+
+        h1 {
+            @apply py-5 text-2xl;
+        }
+        h2 {
+            @apply py-4 text-xl;
+        }
+        h3 {
+            @apply py-2.5 text-lg;
+        }
+
+        h1::before,
+        h2::before,
+        h3::before {
+            @apply inline pr-[7.5px]
+            text-fg-secondary
+                font-roboto-slab;
+        }
+
+        h1::before {
+            content: "#";
+        }
+        h2::before {
+            content: "##";
+        }
+        h3::before {
+            content: "###";
+        }
+
+        hr {
+            @apply border
+                border-solid
+                border-[rgb(62,62,62)];
+        }
+
+        /* TODO: finish + tailwindify */
+        p {
+            @apply my-[1em];
+        }
+        strong {
+            @apply font-semibold;
+        }
+
+        img {
+            @apply max-w-full h-full object-cover border-2 border-[rgb(62,62,62)] rounded-sm;
+        }
+        blockquote {
+            @apply border-l-4
+            border-zinc-700
+                pl-4;
+        }
+
+        ul {
+            /* list-style-type: disc; */
+            @apply list-disc;
+            /* li {
+
+            } */
+        }
+        ol {
+            @apply list-decimal;
+            /* li {
+
+            } */
+        }
+    }
+    table {
+        @apply border-collapse border-spacing-7.5 min-w-[50%];
+
+        td,
+        th {
+            @apply px-5 py-3 text-left border-b border-[rgb(31,31,31)];
+        }
+
+        th {
+            @apply bg-[rgb(23,23,23)] font-medium;
+        }
+    }
+
+    code {
+        @apply font-fira-code;
+
+        &:not(pre > &) {
+            @apply before:content-['`'] after:content-['`'];
+        }
+    }
+}
+
+/* move to new file eventually */
+@layer utilities {
+    a.hero_links {
+        font-family: var(--font-fira-code);
+        font-size: 16px;
+        line-height: 25px;
+        font-weight: 500;
+
+        color: white;
+
+        /* text-decoration-color: rgb(82, 82, 82); */
+        font-weight: 600;
+        text-underline-offset: 2px;
+        text-decoration: underline #525252;
+    }
+
+    @keyframes flash {
+        0%,
+        50% {
+            opacity: 1;
+        }
+        51%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .animate-flash {
+        animation: flash 1s infinite;
+        color: white;
+    }
+
+    .list-star {
+        list-style: none;
+    }
+
+    .list-star::marker {
+        content: "* ";
+    }
+}

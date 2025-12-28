@@ -1,8 +1,19 @@
 ---
-const { siteTitle, siteDesc, ArticleDate } = Astro.props;
 import { config } from "~/config";
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const propsMeta = Astro.props?.meta ?? {};
+const meta = {
+    title: propsMeta.title ?? config.siteTitle ?? config.siteName,
+    description:
+        propsMeta.description ?? config.siteDescription ?? config.siteTitle,
+    publishedAt: propsMeta.publishedAt ?? propsMeta.modifiedAt,
+};
+
+const publishedAt =
+    meta.publishedAt instanceof Date
+        ? meta.publishedAt.toISOString()
+        : meta.publishedAt;
+const canonicalURL = new URL(Astro.url.pathname, config.siteURL);
 ---
 
 <meta charset="utf-8" />
@@ -11,7 +22,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     name="viewport"
 />
 <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-<title>{siteTitle}</title>
+<title>{meta.title}</title>
 
 <!-- google fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,7 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     media="print"
     rel="stylesheet"
     onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap"
 />
 
 <!-- analytics -->
@@ -41,14 +52,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
 
 <!-- basic meta-tags -->
-<meta content={siteTitle} name="title" />
-<meta content={siteDesc} name="description" />
+<meta content={meta.title} name="title" />
+<meta content={meta.description} name="description" />
 <meta content={config.siteAuthor} name="author" />
 
 <!-- open-graph/fb -->
-<meta content={ArticleDate ? "article" : "website"} property="og:type" />
-<meta content={siteTitle} property="og:title" />
-<meta content={siteDesc} property="og:description" />
+<meta content={publishedAt ? "article" : "website"} property="og:type" />
+<meta content={meta.title} property="og:title" />
+<meta content={meta.description} property="og:description" />
 <meta content={canonicalURL} property="og:url" />
 <meta content={config.siteTitle} property="og:site_name" />
 <meta content="en" property="og:locale" />
@@ -56,10 +67,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <meta content="1200" property="og:image:width" />
 <meta content="630" property="og:image:height" />
 {
-    ArticleDate && (
+    publishedAt && (
         <>
             <meta content={config.siteAuthor} property="article:author" />
-            <meta content={ArticleDate} property="article:published_time" />
+            <meta content={publishedAt} property="article:published_time" />
         </>
     )
 }
@@ -67,8 +78,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <!-- twitter -->
 <meta content="summary_large_image" property="twitter:card" />
 <meta content={canonicalURL} property="twitter:url" />
-<meta content={siteTitle} property="twitter:title" />
-<meta content={siteDesc} property="twitter:description" />
+<meta content={meta.title} property="twitter:title" />
+<meta content={meta.description} property="twitter:description" />
 <!-- <meta content={socialImageURL} property="twitter:image" /> -->
 
 <!-- sitemap -->
@@ -76,4 +87,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <!-- rss-feed -->
 <!-- title={siteConfig.title} -->
-<link href="/rss.xml" rel="alternate" type="application/rss+xml" title={config.siteName} />
+<link
+    href="/rss.xml"
+    rel="alternate"
+    type="application/rss+xml"
+    title={config.siteName}
+/>

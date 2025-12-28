@@ -1,0 +1,35 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+import { Code } from "astro:components";
+interface Props {
+    post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+
+const { Content } = await post.render();
+---
+
+<BaseLayout meta={post.data}>
+    <article>
+        {
+            import.meta.env.DEV && (
+                <details>
+                    <summary>metadata</summary>
+
+                    <Code
+                        code={JSON.stringify(post.data, null, 4)}
+                        lang="json"
+                    />
+                </details>
+            )
+        }
+        <h1>{post.data.title}</h1>
+        <Image src={post.data.cover} alt="" width="830" height="1200" />
+        <Content class="markdown" />
+    </article>
+
+</BaseLayout>

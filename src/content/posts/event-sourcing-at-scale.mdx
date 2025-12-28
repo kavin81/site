@@ -1,0 +1,16 @@
+---
+    title: Event Sourcing at Scale
+    description: Patterns for keeping distributed write models coherent under heavy load.
+    tags: ["architecture", "event-sourcing", "distributed-systems"]
+    publishedAt: 2024-02-10
+    cover: images/cover1.1
+
+---
+
+## Why Event Sourcing Still Matters
+
+Event sourcing captures every state change as an immutable event stream, allowing teams to rebuild projections on demand and audit business flows without bespoke tooling. The approach shines when systems demand traceability and high write throughput.
+
+## Keeping Projections Healthy
+
+Projectors should expose back-pressure signals, checkpoint progress, and guard against poison messages. A well-tuned replay story is essential before traffic spikes hit production.

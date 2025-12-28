@@ -9,6 +9,11 @@ const SocialSchema = z.object({
     username: z.string(),
 });
 
+const HeaderSchema = z.object({
+    label: z.string(),
+    url: z.string(),
+});
+
 const ConfigSchema = z.object({
     siteName: z.string(),
     siteTitle: z.string(),
@@ -20,6 +25,8 @@ const ConfigSchema = z.object({
     siteDescription: z.string(),
     siteSocials: z.array(SocialSchema),
     siteAnalyticsID: z.string().describe("umami ID"),
+
+    siteHeader: z.array(HeaderSchema),
 });
 
 export { ConfigSchema };

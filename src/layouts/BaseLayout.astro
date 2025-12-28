@@ -1,21 +1,36 @@
 ---
-import "~/styles/global.css";
+import "~/styles/index.css";
+import { config } from "~/config";
+
+const { meta } = Astro.props;
+
+import BaseHead from "~/components/BaseHead.astro";
+
+import Header from "~/components/layout/Header";
+import Footer from "~/components/layout/Footer";
+// import { PixelCursorTrail } from "~/components/PixelTrail";
+import CommandBar from "~/components/CommandBar";
+
+const resolvedMeta = {
+    title: meta?.title ?? config.siteTitle ?? config.siteName,
+    description:
+        meta?.description ?? config.siteDescription ?? config.siteTitle,
+    publishedAt: meta?.publishedAt ?? meta?.modifiedAt,
+};
 ---
 
 <html lang="en">
-    <!-- <meta charset="UTF-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
-
     <head>
-        
+        <BaseHead meta={resolvedMeta} />
     </head>
-    <body>
-        <main>
+    <!-- #3646ff -> #b952ee -->
+    <body class="flex flex-col min-h-screen px-10 pt-5 font-ibm-plex-sans">
+        <!-- <PixelCursorTrail client:load /> -->
+        <Header currentPath={Astro.url.pathname} client:load />
+        <CommandBar client:load />
+        <main class="py-10">
             <slot />
         </main>
+        <Footer client:visible />
     </body>
 </html>

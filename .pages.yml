@@ -1,12 +1,75 @@
 media:
-  input: public
-  output: /
+  input: public/images # uploads images to `public/images` folder
+  output: /images # served under `/images` path by astro/vercel
+
 content:
   - name: posts
-    label: Posts
+    label: posts # label in pageCMS admin UI
     type: collection
-    path: src/content/posts
+    path: src/content/posts # content folder path
+
+    # pageCMS admin UI
     view:
-      fields: [ title ]
+      fields: [ title, publishedAt, tags ]
+      sort: [ publishedAt ]
+      search: [ slug, title, description, tags, body ]
+      default:
+        search: ''
+        sort: publishedAt
+        order: desc
+
     fields:
-      - { name: body, label: Body, type: rich-text }
+      # post slug [optional -> auto-generated]
+      - name: slug
+        label: Slug
+        type: string
+        description: Optional custom slug for the post URL
+      # post title [required]
+      - name: title
+        label: Title
+        type: string
+        required: true
+      # post description [optional]
+      - name: description
+        label: Description
+        type: text
+        description: Optional post description/summary
+
+      # post cover image [required -> used for og:image]
+      - name: cover
+        label: Cover Image
+        type: image
+        options:
+          extensions: [jpg, jpeg, png]
+        required: true
+
+      # post tags [required.min:1]
+      - name: tags
+        label: Tags
+        type: string
+        list:
+          min: 1
+        required: true
+        description: At least one tag is required
+
+      # post published date [required]
+      - name: publishedAt
+        label: Published At
+        type: date
+        options:
+          time: true
+
+        required: true
+
+      # post modified date [optional -> auto-updated]
+      - name: modifiedAt
+        label: Modified At
+        type: date
+        options:
+          time: true
+        description: Optional last modified date
+
+      # markdown [required]
+      - name: body
+        label: Body
+        type: rich-text

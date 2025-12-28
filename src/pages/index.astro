@@ -1,6 +1,15 @@
 ---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Home from "~/components/Home";
+import PostList from "~/components/PostList";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
 ---
 
-<ul>
-    <li><a href="/posts">Posts</a></li>
-</ul>
+<BaseLayout>
+    <div class="mx-auto max-w-2xl">
+        <Home />
+        <PostList posts={posts} postsPerPage={10} />
+    </div>
+</BaseLayout>

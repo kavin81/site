@@ -1,0 +1,16 @@
+---
+    title: Adaptive Backpressure Propagation in Distributed Log Structured Storage Engines Under Partial Network Partitions
+    description: Choosing shard keys and topologies that survive traffic spikes.
+    tags: ["databases", "scalability", "sharding"]
+    publishedAt: 2024-06-30
+    cover: images/cover1.1
+
+---
+
+## Picking the Right Key
+
+Shard keys need even cardinality, locality awareness, and alignment with access patterns to avoid hotspots and cross-shard fan-out.
+
+## Operational Discipline
+
+Automate shard splits, rehearse failover, and build a catalog describing ownership so teams can reason about growth plans.
