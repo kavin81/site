@@ -1,0 +1,10 @@
+# robots.txt for skavin.in
+User-agent: *
+Allow: /
+
+# Disallow admin/test pages if any exist
+Disallow: /api/
+Disallow: *.json$
+
+# Sitemap location
+Sitemap: https://skavin.in/sitemap-index.xml
