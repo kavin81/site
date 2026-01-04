@@ -1,0 +1,80 @@
+---
+// Header.astro
+import MobileNav from "~/components/layout/MobileNav.astro";
+import { config } from "~/lib/config";
+import { clsx } from "clsx";
+
+interface Props {
+    currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const isActive = (target: string) =>
+    currentPath === target ||
+    currentPath.startsWith(`${target}/`) ||
+    (target.endsWith("s") && currentPath.startsWith(`${target.slice(0, -1)}/`));
+---
+
+<header class="relative flex flex-wrap items-center justify-between gap-4">
+    <a href="/" class="text-2xl no-underline">
+        <span
+            class={currentPath === "/"
+                ? "underline decoration-1 underline-offset-3"
+                : ""}
+        >
+            {config.siteName}
+        </span>
+    </a>
+
+    <button
+        type="button"
+        id="mobile-menu-toggle"
+        class="ml-4 flex items-center text-2xl md:hidden"
+        aria-expanded="false"
+        aria-controls="site-nav"
+    >
+        <span class="text-3xl" id="menu-icon">▾</span>
+        <span class="sr-only">Toggle navigation</span>
+    </button>
+
+    <nav class="hidden md:flex">
+        <ul class="flex gap-5">
+            {
+                config.siteHeader.map(item => {
+                    const active = isActive(item.url);
+                    return (
+                        <li>
+                            <a
+                                href={item.url}
+                                aria-current={active ? "page" : undefined}
+                                class={clsx(
+                                    "block px-3 py-2 font-fira-code underline-offset-2 decoration-1",
+                                    "hover:underline focus-visible:underline focus-visible:outline-none",
+                                    active && "underline",
+                                )}
+                            >
+                                {item.label}
+                            </a>
+                        </li>
+                    );
+                })
+            }
+        </ul>
+    </nav>
+
+    <MobileNav currentPath={currentPath} />
+</header>
+
+<script>
+    const toggle = document.getElementById("mobile-menu-toggle");
+    const nav = document.getElementById("site-nav");
+    const icon = document.getElementById("menu-icon");
+
+    toggle?.addEventListener("click", () => {
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+        nav?.setAttribute("data-open", String(!isOpen));
+        if (icon) icon.textContent = isOpen ? "▾" : "▴";
+    });
+</script>

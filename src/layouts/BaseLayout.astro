@@ -1,14 +1,13 @@
 ---
-import "~/styles/index.css";
-import { config } from "~/config";
+import "~/styles/globals.css";
+import { config } from "~/lib/config";
 
 const { meta } = Astro.props;
 
-import BaseHead from "~/components/BaseHead.astro";
+import BaseHead from "~/layouts/BaseHead.astro";
 
-import Header from "~/components/layout/Header";
-import Footer from "~/components/layout/Footer";
-// import { PixelCursorTrail } from "~/components/PixelTrail";
+import Header from "~/components/layout/Header.astro";
+import Footer from "~/components/layout/Footer.astro";
 import CommandBar from "~/components/CommandBar";
 
 const resolvedMeta = {
@@ -20,17 +19,13 @@ const resolvedMeta = {
 ---
 
 <html lang="en">
-    <head>
-        <BaseHead meta={resolvedMeta} />
-    </head>
-    <!-- #3646ff -> #b952ee -->
-    <body class="flex flex-col min-h-screen px-10 pt-5 font-ibm-plex-sans">
-        <!-- <PixelCursorTrail client:load /> -->
-        <Header currentPath={Astro.url.pathname} client:load />
-        <CommandBar client:load />
+    <BaseHead meta={resolvedMeta} />
+    <body class="flex flex-col min-h-screen px-7.5 pt-5">
+        <Header currentPath={Astro.url.pathname} />
+        <!-- <CommandBar client:visible /> -->
         <main class="py-10">
             <slot />
         </main>
-        <Footer client:visible />
+        <Footer />
     </body>
 </html>

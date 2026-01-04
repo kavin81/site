@@ -1,0 +1,23 @@
+# Sample AGENTS.md file
+
+
+## tech stack
+
+```yaml
+- astro
+  - astro
+  - @astrojs/mdx
+- mdx
+- reactjs
+  - @astrjs/react
+  - react
+  - react-dom
+  - react-icons
+  - cmdk
+- tailwindcss
+  - tailwindcss
+  - @tailwindcss/vite
+  - tailwind-scrollbar
+- typescript
+  - typescript
+  - tsx

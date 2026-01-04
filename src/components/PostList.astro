@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import clsx from "clsx";
+
+interface Props {
+    posts: CollectionEntry<"posts">[];
+    page?: number;
+    postsPerPage?: number;
+}
+
+const { posts, page = 1, postsPerPage = 0 } = Astro.props;
+
+// fetch most recent posts
+const sortedPosts = posts
+    .filter(post => post.data.publishedAt <= new Date())
+    .sort(
+        (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+    );
+
+// pagination logic
+const startIndex = (page - 1) * postsPerPage;
+const endIndex = startIndex + postsPerPage;
+const paginatedPosts = sortedPosts.slice(startIndex, endIndex);
+
+// date logic
+function formatPublishedDate(date: Date) {
+    const month = date.toLocaleDateString("en-US", { month: "short" });
+    const year = date.getFullYear().toString().slice(-2);
+    return `${month}'${year}`;
+}
+---
+
+<div>
+    <div class="flex items-center justify-between">
+        <h1 class="pb-3">Latest Posts</h1>
+
+        <a href="/feed.atom" aria-label="RSS Feed">
+            <Icon
+                name="mdi:rss"
+                class={clsx("w-8 h-8 text-amber-500/90 hover:animate-pulse")}
+            />
+        </a>
+    </div>
+    <div class="mt-1 mb-4 h-px bg-white/20" aria-hidden="true"></div>
+    <ul class="space-y-1">
+        {
+            paginatedPosts.map(post => (
+                <li class="marker:text-post-marker">
+                    <a
+                        href={`/post/${post.slug}`}
+                        class={clsx(
+                            "block rounded-sm border border-transparent",
+                            "px-2 py-1 transition-colors",
+                            "hover:bg-white/10 hover:border-border",
+                        )}
+                    >
+                        <p class="flex items-baseline gap-6">
+                            <span class="text-gray-300 tracking-tighter whitespace-nowrap min-w-18 text-right">
+                                {formatPublishedDate(post.data.publishedAt)}
+                            </span>
+                            <span
+                                class={clsx(
+                                    "text-lg flex-1",
+                                    "text-gray-300 underline decoration-dashed underline-offset-3 decoration-[.5px]",
+                                    "break-keep wrap-normal",
+                                )}
+                            >
+                                {post.data.title}
+                            </span>
+                        </p>
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</div>

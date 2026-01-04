@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+        Consolas, "Liberation Mono", monospace;
+
+    --color-primary: white;
+    --color-secondary: rgb(18, 18, 18);
+    --color-tertiary: rgb(64, 64, 64);
+
+    --color-accent-red: rgb(255, 97, 102);
+    --color-accent-green: rgb(98, 192, 115);
+    --color-accent-blue: rgb(82, 168, 255);
+
+    --color-accent-purple: rgb(191, 122, 240);
+    --color-accent-orange: rgb(242, 162, 13);
+    --color-accent-amber: rgb(245, 158, 11);
+}
+
+@layer base {
+    :root {
+        font-family: var(--font-mono);
+        color-scheme: dark;
+        color: var(--color-primary);
+        background-color: var(--color-secondary);
+
+        h1,
+        h2,
+        h3 {
+            @apply font-semibold font-mono;
+
+            &::before {
+                @apply text-tertiary pr-2;
+            }
+        }
+
+        h1 {
+            @apply py-5 text-2xl;
+        }
+        h2 {
+            @apply py-4 text-xl;
+        }
+        h3 {
+            @apply py-2.5 text-lg;
+        }
+
+        h1::before {
+            content: "#";
+        }
+        h2::before {
+            content: "##";
+        }
+        h3::before {
+            content: "###";
+        }
+
+        strong {
+            @apply font-semibold;
+        }
+        blockquote {
+            @apply border-l-4
+            border-tertiary
+                pl-4;
+        }
+    }
+}

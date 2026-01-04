@@ -8,7 +8,7 @@ const posts = defineCollection({
             // metadata fields
             title: z.string(),
             description: z.string().optional(),
-            cover: image(),
+            cover: image().optional(),
             tags: z.array(z.string()).refine((tags) => tags.length > 0, {
                 message: "each post must have at least one tag",
             }),

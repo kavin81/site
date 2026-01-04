@@ -1,32 +1,49 @@
 import { z } from "zod";
 
+const httpsUrl = z
+    .url()
+    .startsWith("https://", { message: "Must be an https URL" });
+
+const socialUrl = z
+    .url()
+    .refine(
+        (url) => url.startsWith("https://") || url.startsWith("mailto:"),
+        { message: "Must be https:// or mailto:" }
+    );
+
+
 const SocialSchema = z.object({
     label: z.string(),
-    url: z.url().refine(
-        (url) => ["https:", "mailto:"].some(scheme => url.startsWith(scheme)),
-        { message: "Social URL must use https: or mailto: scheme" }
-    ),
+    url: socialUrl,
     username: z.string(),
 });
 
-const HeaderSchema = z.object({
+const HeaderLinkSchema = z.object({
     label: z.string(),
     url: z.string(),
 });
 
-const ConfigSchema = z.object({
-    siteName: z.string(),
-    siteTitle: z.string(),
-    siteURL: z.url().refine(
-        (url) => url.startsWith("https:"),
-        { message: "Site URL must use https: scheme" }
-    ),
-    siteAuthor: z.string(),
-    siteDescription: z.string(),
-    siteSocials: z.array(SocialSchema),
-    siteAnalyticsID: z.string().describe("umami ID"),
-
-    siteHeader: z.array(HeaderSchema),
+const GiscusSchema = z.object({
+    repo: z.string(),
+    repoId: z.string(),
+    category: z.string(),
+    categoryId: z.string(),
 });
 
-export { ConfigSchema };
+
+export const ConfigSchema = z
+    .object({
+        siteName: z.string(),
+        siteTitle: z.string(),
+        siteAuthor: z.string(),
+        siteDescription: z.string(),
+        siteURL: httpsUrl,
+
+        siteSocials: z.array(SocialSchema),
+        siteHeader: z.array(HeaderLinkSchema),
+        siteGiscus: GiscusSchema,
+    })
+    .strict();
+
+
+export type Config = z.infer<typeof ConfigSchema>;

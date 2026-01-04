@@ -1,0 +1,171 @@
+/* @import "./base.css"; */
+@import "./globals.css";
+
+@layer components {
+    article {
+        /* links */
+        a {
+            @apply  underline decoration-tertiary decoration-1 underline-offset-3;
+        }
+        p {
+            @apply my-[1em] text-gray-300;
+        }
+
+        /* lists */
+        ul,
+        ol {
+            @apply mb-5 pl-6;
+
+            li {
+                @apply my-2 pl-2 marker:text-gray-500;
+            }
+        }
+        ul {
+            @apply list-disc;
+        }
+        ol {
+            @apply list-decimal;
+        }
+
+        /* code block */
+        :not(pre) > code {
+            @apply
+                /* before */
+                before:content-['`']
+                before:text-tertiary
+                /* after */
+                after:content-['`']
+                after:text-tertiary;
+        }
+        hr {
+            @apply border-tertiary;
+        }
+        figure[data-rehype-pretty-code-figure] {
+            @apply border-tertiary;
+            border-width: 2px;
+
+            figcaption {
+                @apply px-4 py-2 text-sm underline underline-offset-2;
+            }
+
+            pre {
+                code {
+                    @apply whitespace-pre overflow-x-auto;
+                    counter-reset: line;
+
+                    /* inline code (not inside pre) */
+                    &:not(pre > &) {
+                        @apply before:content-['`'] after:content-['`'];
+                    }
+
+                    /* line numbers */
+                    > span[data-line]::before {
+                        counter-increment: line;
+                        content: counter(line);
+
+                        display: inline-block;
+                        width: 3ch;
+                        margin-right: 1em;
+                        text-align: right;
+                        user-select: none;
+                    }
+
+                    /* padding for first/last lines */
+                    span:first-of-type {
+                        padding-top: 0.5em;
+                    }
+
+                    span:last-of-type {
+                        padding-bottom: 0.5em;
+                    }
+                }
+            }
+        }
+        table {
+            @apply block overflow-x-auto whitespace-nowrap border-collapse border-spacing-7.5 min-w-[50%];
+
+            td,
+            th {
+                @apply px-5 py-3 text-left border-b border-tertiary;
+            }
+
+            th {
+                @apply font-medium;
+            }
+        }
+        .markdown-alert {
+            @apply flex items-center mb-4 rounded-md;
+
+            & > :first-child {
+                @apply mt-0;
+            }
+
+            & > :last-child {
+                @apply mb-0;
+            }
+
+            p {
+                @apply py-3;
+                &.markdown-alert-title {
+                    @apply pl-3 mb-0 flex items-center;
+
+                    & > svg {
+                        @apply mr-3;
+                    }
+                }
+
+                &:not(.markdown-alert-title) {
+                    @apply mt-0 pr-3 text-sm;
+                }
+            }
+            &.markdown-alert-note {
+                @apply border-sky-900 border-2;
+                p {
+                    &::selection,
+                    code::selection {
+                        @apply bg-sky-900;
+                    }
+                }
+            }
+            &.markdown-alert-tip {
+                @apply border-green-900 border-2;
+                p {
+                    &::selection,
+                    code::selection {
+                        @apply bg-green-900;
+                    }
+                }
+            }
+            &.markdown-alert-important {
+                @apply border-purple-900 border-2;
+                p {
+                    &::selection,
+                    code::selection {
+                        @apply bg-purple-900;
+                    }
+                }
+            }
+            &.markdown-alert-warning {
+                @apply border-yellow-900 border-2;
+                p {
+                    &::selection,
+                    code::selection {
+                        @apply bg-yellow-900;
+                    }
+                }
+            }
+            &.markdown-alert-caution {
+                @apply border-red-900 border-2;
+                p {
+                    &::selection,
+                    code::selection {
+                        @apply bg-red-900;
+                    }
+                }
+            }
+        }
+    }
+    .giscus {
+        @apply mt-10;
+    }
+}

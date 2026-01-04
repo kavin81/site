@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import Home from "~/components/Home";
-import PostList from "~/components/PostList";
+import Hero from "~/components/Hero.astro";
+import PostList from "~/components/PostList.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts");
@@ -9,7 +9,7 @@ const posts = await getCollection("posts");
 
 <BaseLayout>
     <div class="mx-auto max-w-2xl">
-        <Home />
-        <PostList posts={posts} postsPerPage={10} />
+        <Hero />
+        <PostList posts={posts} postsPerPage={5} />
     </div>
 </BaseLayout>

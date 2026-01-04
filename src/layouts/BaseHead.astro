@@ -1,0 +1,75 @@
+---
+import { config } from "~/lib/config";
+
+const propsMeta = Astro.props?.meta ?? {};
+
+const meta = {
+    title: propsMeta.title ?? config.siteTitle ?? config.siteName,
+    description:
+        propsMeta.description ?? config.siteDescription ?? config.siteTitle,
+    publishedAt: propsMeta.publishedAt ?? propsMeta.modifiedAt,
+};
+
+const publishedAt =
+    meta.publishedAt instanceof Date
+        ? meta.publishedAt.toISOString()
+        : meta.publishedAt;
+
+const canonicalURL = new URL(Astro.url.pathname, config.siteURL);
+---
+
+<head>
+    <!-- generic -->
+    <meta charset="utf-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{meta.title}</title>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Fira+Code:wght@400;600&display=swap"
+    />
+
+    <!-- meta -->
+    <meta content={meta.title} name="title" />
+    <meta content={meta.description} name="description" />
+    <meta content={config.siteAuthor} name="author" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- og:property -->
+    <meta property="og:type" content={publishedAt ? "article" : "website"} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={config.siteTitle} />
+    <meta property="og:locale" content="en" />
+    <!-- TODO: <meta property="og:image" content={socialImageURL} /> -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {
+        publishedAt && (
+            <>
+                <meta content={config.siteAuthor} property="article:author" />
+                <meta content={publishedAt} property="article:published_time" />
+            </>
+        )
+    }
+
+    <!-- twitter:card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <!-- TODO: <meta content={socialImageURL} property="twitter:image" /> -->
+
+    <!-- index -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- TODO: title={`${config.siteTitle} RSS Feed`} -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
+</head>

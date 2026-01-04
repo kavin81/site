@@ -2,18 +2,19 @@
 import { getCollection } from "astro:content";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostList from "~/components/PostList.astro";
 
 const posts = await getCollection("posts");
+const postsPerPage = 15;
+const currentPage = 1;
 ---
 
 <BaseLayout>
-    <ul>
-        {
-            posts.map(post => (
-                <li>
-                    <a href={`/post/${post.slug}`}>{post.data.title}</a>
-                </li>
-            ))
-        }
-    </ul>
+    <div class="mx-auto max-w-2xl">
+        <PostList
+            posts={posts}
+            page={currentPage}
+            postsPerPage={postsPerPage}
+        />
+    </div>
 </BaseLayout>
